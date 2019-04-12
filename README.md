@@ -9,6 +9,10 @@ uccx-dsn.dsn is an example file of ODBC configuration on Windows. odbcinst.ini i
 ```
 export INFORMIXDIR=/opt/IBM/informix
 export LD_LIBRARY_PATH=$INFORMIXDIR/lib:$INFORMIXDIR/lib/cli:$INFORMIXDIR/lib/esql
+``` 
+Also if in some cases might be needed to set up sqlhosts file in /opt/IBM/informix/etc:
+```
+uccx_uccx onsoctcp uccx 1504
 ```
 - UCCX real-time data collecting enabled at "Tools -> Real Time Snapshot Writing Configuration" with both "CCX CSQs Summary" and "CCX System Summary" options.
 
