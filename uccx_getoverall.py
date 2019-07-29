@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import configparser
+import os
 from datetime import datetime
 from uccx_dbquery import dbquery
 
@@ -18,9 +18,8 @@ for i in results:
     Text += '{} - callshandled={}\n'.format(str(i[0]), str(i[10]))
     Text += '{} - callsabandoned={}\n'.format(str(i[0]), str(i[11]))
 
-vars = configparser.ConfigParser()
-vars.read('uccx_vars.conf')
-statpath = vars['system']['statpath']
-File = open(statpath + '_uccx_overall.txt', 'w+')
+path = os.path.dirname(os.path.abspath( __file__ ))
+File = open(os.path.join(path, '_uccx_overall.txt'), 'w+')
 File.write(Text)
 File.close()
+print(Text)

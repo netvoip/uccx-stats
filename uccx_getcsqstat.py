@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import configparser
+import os
 from datetime import datetime
 from uccx_dbquery import dbquery
 
@@ -31,9 +31,8 @@ for i in results:
     Text += '{} - longestwaitduration={}\n'.format(str(i[0]), str(round(i[12]/1000)))
     Text += '{} - oldestcontact={}\n'.format(str(i[0]), str(round(i[5]/1000)))
 
-vars = configparser.ConfigParser()
-vars.read('uccx_vars.conf')
-statpath = vars['system']['statpath']
-File = open(statpath + '_uccx_csqstats.txt', 'w+')
+path = os.path.dirname(os.path.abspath( __file__ ))
+File = open(os.path.join(path, '_uccx_csqstats.txt'), 'w+')
 File.write(Text)
 File.close()
+print(Text)

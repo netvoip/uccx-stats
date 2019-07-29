@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import configparser
 import re
 import argparse
+import os
 from datetime import datetime, timedelta
 
 Timestart = datetime.now()
-vars = configparser.ConfigParser()
-vars.read('uccx_vars.conf')
-statpath = vars['system']['statpath']
 parser = argparse.ArgumentParser(description='Returns value from text file')
 parser.add_argument('file', action="store", default=False)
 parser.add_argument('str', action="store", default=False)
 args = parser.parse_args()
 
 Search = args.str + '='
-File = open(statpath + args.file, 'r')
+path = os.path.dirname(os.path.abspath( __file__ ))
+File = open(os.path.join(path, args.file), 'r')
 Text = File.read()
 File.close()
 
