@@ -5,15 +5,7 @@ Set of tools to get statistics from UCCX database and parse it for further proce
 - Python 3+ with pyodbc module installed.
 - IBM Informix driver as part of Informix Client SDK installed.
 uccx-dsn.dsn is an example file of ODBC configuration on Windows. odbcinst.ini is an example file of ODBC configuration on Linux.
-- Unix-only: unixODBC package installed. Some environment variables might be required, such as:
-```
-export INFORMIXDIR=/opt/IBM/informix
-export LD_LIBRARY_PATH=$INFORMIXDIR/lib:$INFORMIXDIR/lib/cli:$INFORMIXDIR/lib/esql
-``` 
-Also if in some cases might be needed to set up sqlhosts file in /opt/IBM/informix/etc:
-```
-uccx_uccx onsoctcp uccx 1504
-```
+- Unix-only: unixODBC package installed and configured. See [guide](doc/ODBC_guide.md) .
 - UCCX real-time data collecting enabled at "Tools -> Real Time Snapshot Writing Configuration" with both "CCX CSQs Summary" and "CCX System Summary" options.
 
 ### Usage
@@ -65,4 +57,4 @@ For overall:
 ### Example
 This is what it looks like on Grafana using Zabbix datasource.  
 
-![Wallboard example](./example_wallboard.png)
+![Wallboard example](./doc/example_wallboard.png)
