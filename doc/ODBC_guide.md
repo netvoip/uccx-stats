@@ -2,7 +2,7 @@ Informix ODBC seems to have versatile behavior and may vary on driver version an
 *Environment*: Ubuntu 18.04 x64, SDK 4.50.FC3.
 
 - Get Informix Client SDK from IBM site and install it. Let's assume installation path is /opt/IBM/informix.
-- Install packages `apt install unixodbc-dev unixodbc-dev` and python module `pip3 install pyodbc`.
+- Install packages `apt install unixodbc-dev unixodbc` and python module `pip3 install pyodbc`.
 - Check ODBC configuration files location with `odbcinst -j` command.
 ``` 
 unixODBC 2.3.4
