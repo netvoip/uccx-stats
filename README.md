@@ -18,7 +18,6 @@ Description=CSQ Statistics
 After=multi-user.target
 Conflicts=getty@tty1.service
 
-
 [Service]
 Type=simple
 Restart=always
