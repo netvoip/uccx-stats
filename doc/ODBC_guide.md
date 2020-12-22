@@ -90,10 +90,10 @@ It should not contain 'not found' output. Sometimes it is required to create sym
 - When running driver following environment variables must be declared:
 ```
 export INFORMIXDIR=/opt/IBM/informix
-export LD_LIBRARY_PATH=$INFORMIXDIR/lib:$INFORMIXDIR/lib/cli:$INFORMIXDIR/lib/esql
-export INFORMIXSQLHOSTS=$INFORMIXDIR/etc/sqlhosts
+export LD_LIBRARY_PATH=/opt/IBM/informix/lib:/opt/IBM/informix/lib/cli:/opt/IBM/informix/lib/esql
+export INFORMIXSQLHOSTS=/opt/IBM/informix/etc/sqlhosts
 ```
-You can put it to ~/.profile file.
+You can put it to ~/.profile file for user or /etc/environment for system-wide. Don't use nested variables, it won't work in some scenarios!
 
 - unixODBC guide https://docs.snowflake.net/manuals/user-guide/odbc-linux.html  
 - pyodbc wiki https://github.com/mkleehammer/pyodbc/wiki  

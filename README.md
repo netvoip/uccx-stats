@@ -9,17 +9,37 @@ uccx-dsn.dsn is an example file of ODBC configuration on Windows. odbcinst.ini i
 - UCCX real-time data collecting enabled at "Tools -> Real Time Snapshot Writing Configuration" with both "CCX CSQs Summary" and "CCX System Summary" options.
 
 ### Usage
-`uccx_getcsqstat.py` collects statistics for every existing CSQ and stores it in _uccx_csqstats.txt file.
-For 30 seconds launch add two lines like these to your cron file:
-```
-* * * * * user . $HOME/.profile; cd /opt/uccx-stats/ && python3 uccx_getcsqstat.py > /dev/null 2>> ./uccx-stats.log
-* * * * * user ( . $HOME/.profile; sleep 30; cd /opt/uccx-stats/ && python3 uccx_getcsqstat.py > /dev/null 2>> ./uccx-stats.log )
-```  
+`uccx_getcsqstat_loop.py` collects statistics for every existing CSQ in _uccx_csqstats.txt and summary statistics across all CSQs in _uccx_overall.txt. Default interval is 10 seconds and you can set it to your desired value, even 1 second is alright.
 
-`uccx_getoverall.py` collects summary statistics for all CSQs and keeps it in _uccx_overall.txt file.
-For 60 seconds launch add line like this to your cron file:
+Create systemd service such as `/lib/systemd/system/getcsq.service`
 ```
-* * * * * user ( . $HOME/.profile; sleep 10; cd /opt/uccx-stats/ && python3 uccx_getoverall.py > /dev/null 2>> ./uccx-stats.log )
+[Unit]
+Description=CSQ Statistics
+After=multi-user.target
+Conflicts=getty@tty1.service
+
+
+[Service]
+Type=simple
+Restart=always
+User=getcsq
+Group=getcsq
+Environment="INFORMIXDIR=/opt/IBM/informix"
+Environment="LD_LIBRARY_PATH=/opt/IBM/informix/lib:/opt/IBM/informix/lib/cli:/opt/IBM/informix/lib/esql"
+Environment="INFORMIXSQLHOSTS=/opt/IBM/informix/etc/sqlhosts"
+WorkingDirectory=/opt/uccx-stats/
+ExecStart=/usr/bin/python3 /opt/uccx-stats/uccx_getcsqstat_loopt.py
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
+```
+Enable and start service
+
+```
+systemctl daemon-reload
+systemctl enable getcsq
+systemctl start getcsq
 ```
 
 `uccx_parse.py` extracts value from text file. Use it to fill data on your monitoring system or database directly. 
