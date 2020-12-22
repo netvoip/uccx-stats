@@ -27,7 +27,7 @@ Environment="INFORMIXDIR=/opt/IBM/informix"
 Environment="LD_LIBRARY_PATH=/opt/IBM/informix/lib:/opt/IBM/informix/lib/cli:/opt/IBM/informix/lib/esql"
 Environment="INFORMIXSQLHOSTS=/opt/IBM/informix/etc/sqlhosts"
 WorkingDirectory=/opt/uccx-stats/
-ExecStart=/usr/bin/python3 /opt/uccx-stats/uccx_getcsqstat_loopt.py
+ExecStart=/usr/bin/python3 /opt/uccx-stats/uccx_getcsqstat_loop.py
 StandardInput=tty-force
 
 [Install]
