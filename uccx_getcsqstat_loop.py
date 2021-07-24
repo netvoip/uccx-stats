@@ -30,14 +30,13 @@ host2 = vars['uccx']['uccx2']
 server2 = vars['uccx']['server2']
 
 
-def DbQuery(query):
+def DbQuery(query, host, server):
     # Set up connection
     try:
         conn = pyodbc.connect('SERVICE=1504;PROTOCOL=onsoctcp;CLIENT_LOCALE=en_US.UTF8;DB_LOCALE=en_US.UTF8',
-                            driver = driver, uid = dbuser, pwd = dbpass, database = database, host = host1, server = server1)
+                            driver = driver, uid = dbuser, pwd = dbpass, database = database, host = host, server = server)
     except:
-        conn = pyodbc.connect('SERVICE=1504;PROTOCOL=onsoctcp;CLIENT_LOCALE=en_US.UTF8;DB_LOCALE=en_US.UTF8',
-                            driver = driver, uid = dbuser, pwd = dbpass, database = database, host = host2, server = server2)
+        return []
     conn.setdecoding(pyodbc.SQL_WCHAR, encoding='UTF-8')
     conn.setdecoding(pyodbc.SQL_CHAR, encoding='UTF-8')
     conn.setencoding(encoding='UTF-8')
@@ -50,9 +49,20 @@ def DbQuery(query):
     return(results[0])
 
 def GetCsqStat():
-    results = DbQuery('select * from RtCSQsSummary')
+    response1 = DbQuery('select * from RtCSQsSummary', host1, server1)
+    response2 = DbQuery('select * from RtCSQsSummary', host2, server2)
+    if response1 == []:
+        response = response2
+    elif response2 == []:
+        response = response1
+    else:
+        if response1[0][14] >= response2[0][14]:
+            response = response1
+        else:
+            response = response2
+
     text = str(datetime.now()) + '\n\n'
-    for i in results:
+    for i in response:
         # Active agents = workingagents + talkingagents + reservedagents + availableagents
         Active = i[15] + i[16] + i[17] + i[2]
         # Ratio = callsabandoned / totalcalls

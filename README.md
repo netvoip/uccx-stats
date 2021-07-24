@@ -5,7 +5,7 @@ Set of tools to get statistics from UCCX database and parse it for further proce
 - Python 3+ with pyodbc module installed.
 - IBM Informix driver as part of Informix Client SDK installed.
 uccx-dsn.dsn is an example file of ODBC configuration on Windows. odbcinst.ini is an example file of ODBC configuration on Linux.
-- Unix-only: unixODBC package installed and configured. See [guide](doc/ODBC_guide.md) .
+- Unix-only: unixODBC package installed and configured. See [guide](doc/ODBC_guide.md).
 - UCCX real-time data collecting enabled at "Tools -> Real Time Snapshot Writing Configuration" with both "CCX CSQs Summary" and "CCX System Summary" options.
 
 ### Usage
