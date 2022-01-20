@@ -74,6 +74,6 @@ For overall:
 - callsabandoned.
 
 ### Example
-This is what it looks like on Grafana using Zabbix datasource.  
+This is what it looks like on Grafana using Zabbix datasource. Please don't ask to share dashboard since I only have customized for my environment. Make your own is an easy part.
 
 ![Wallboard example](./doc/example_wallboard.png)
